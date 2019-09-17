@@ -7,4 +7,8 @@ class UsersController < ApplicationController
   def show
     @user = User.find_by(id: params[:id])
   end
+
+  # newアクションを追加してください
+  def new
+  end
 end

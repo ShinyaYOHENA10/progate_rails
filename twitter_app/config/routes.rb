@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'users/index'
-  get "users/:id" => "users#show"
+  get "users/:id" => "users#show" 
+  # アカウント作成　URLはsignup,アクションはnew
+  get "signup" => "users#new"
   get "posts/index" => "posts#index"
   get "posts/new" => "posts#new"
   get "posts/:id" => "posts#show"
