@@ -3,6 +3,7 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  # showアクションを追加してください
   def show
     @user = User.find_by(id: params[:id])
   end
