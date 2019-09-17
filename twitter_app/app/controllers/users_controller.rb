@@ -8,21 +8,23 @@ class UsersController < ApplicationController
   end
   
   def new
-    # Userインスタンスを作成し、変数@userに代入してください
     @user = User.new
-    
   end
   
   def create
     @user = User.new(name: params[:name], email: params[:email])
-    # 保存が成功したかどうかで条件分岐をしてください
     if @user.save
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")
     else
-      # renderのパスはコントローラとアクション 文頭スラ無し
       render("users/new")
     end
+  end
+  
+  # editアクションを作成してください
+  # 編集するアカウントを取ってくるためfind_by
+  def edit
+    @user = User.find_by(id: params[:id])
   end
   
 end
