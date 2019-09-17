@@ -3,16 +3,21 @@
     <div class="form-heading">新規ユーザー登録</div>
     <div class="form users-form">
       <div class="form-body">
-        <!-- form_tagメソッドを用いて、データの送信先を指定してください -->
+        <!-- エラーメッセージを表示するためのHTMLを貼り付けてください -->
+        <% @user.errors.full_messages.each do |message| %>
+          <div class="form-error">
+            <%= message %>
+          </div>
+        <% end %>
+        
         <%= form_tag("/users/create") do %>
           <p>ユーザー名</p>
-          <!-- name属性を設定してください -->
-          <input name="name">
+          <!-- value属性を用いて、初期値を設定してください -->
+          <input name="name" value="<%= @user.name %>">
           <p>メールアドレス</p>
-          <!-- name属性を設定してください -->
-          <input name="email">
+          <!-- value属性を用いて、初期値を設定してください -->
+          <input name="email" value="<%= @user.email %>">
           <input type="submit" value="新規登録">
-        <!-- end を追加してください -->
         <% end %>
       </div>
     </div>
