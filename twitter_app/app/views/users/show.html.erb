@@ -2,6 +2,7 @@
   <div class="container">
     <div class="user">
       <!-- <img>タグを用いて、プロフィール画像を表示してください -->
+      <%# each内じゃないのでインスタンス変数で取得 %>
       <img src="<%="/user_images/#{@user.image_name}" %>">
       <h2><%= @user.name %></h2>
       <p><%= @user.email %></p>
