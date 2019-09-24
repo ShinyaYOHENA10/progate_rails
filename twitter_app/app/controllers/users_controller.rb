@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   def index
     @users = User.all
   end
@@ -34,7 +35,6 @@ class UsersController < ApplicationController
     @user.name = params[:name]
     @user.email = params[:email]
     
-    # 画像を保存する処理を追加してください
     if params[:image]
       @user.image_name = "#{@user.id}.jpg"
       image = params[:image]
@@ -48,5 +48,10 @@ class UsersController < ApplicationController
       render("users/edit")
     end
   end
+  
+  # login_formアクションを追加してください
+  def login_form
+  end
+  
   
 end
