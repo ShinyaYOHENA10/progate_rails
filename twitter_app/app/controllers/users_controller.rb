@@ -52,9 +52,21 @@ class UsersController < ApplicationController
   def login_form
   end
   
-  # loginアクションを追加してください
   def login
-    # 情報取得は次のレッスンで
+    # 入力内容と一致するユーザーを取得し、変数@userに代入
+    @user = User.find_by(
+      email: params[:email],
+      password: params[:password]
+    )
+
+    # @userが存在するかどうかを判定するif文を作成
+    if @user
+      flash[:notice] = "ログインしました"
+      redirect_to("/posts/index")
+     else
+      # renderではコントローラ#アクション名
+       render("users/login_form")
+    end
   end
   
 end
