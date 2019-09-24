@@ -49,9 +49,12 @@ class UsersController < ApplicationController
     end
   end
   
-  # login_formアクションを追加してください
   def login_form
   end
   
+  # loginアクションを追加してください
+  def login
+    # 情報取得は次のレッスンで
+  end
   
 end

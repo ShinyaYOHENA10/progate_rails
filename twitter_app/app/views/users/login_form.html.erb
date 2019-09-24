@@ -3,12 +3,18 @@
     <div class="form-heading">ログイン</div>
     <div class="form users-form">
       <div class="form-body">
-        <p>メールアドレス</p>
-        <input>
-        <p>パスワード</p>
-        <!-- 以下のinputタグにtype属性を指定してください -->
-        <input type="password">
-        <input type="submit" value="ログイン">
+        <!-- form_tagメソッドを追加してください -->
+        <%# formtagメソッドの「do」忘れない %>
+        <%= form_tag("/login") do %>
+          <p>メールアドレス</p>
+          <!-- name属性を追加してください -->
+          <input name="email">
+          <p>パスワード</p>
+          <!-- name属性を追加してください -->
+          <input type="password" name="password">
+          <input type="submit" value="ログイン">
+        <!-- form_tag用のendを追加してください -->
+        <% end %>
       </div>
     </div>
   </div>
