@@ -53,19 +53,21 @@ class UsersController < ApplicationController
   end
   
   def login
-    # 入力内容と一致するユーザーを取得し、変数@userに代入
-    @user = User.find_by(
-      email: params[:email],
-      password: params[:password]
-    )
-
-    # @userが存在するかどうかを判定するif文を作成
+    @user = User.find_by(email: params[:email], password: params[:password])
     if @user
       flash[:notice] = "ログインしました"
       redirect_to("/posts/index")
-     else
-      # renderではコントローラ#アクション名
-       render("users/login_form")
+    else
+      # ログイン失敗時にエラー文表示させるため@error_messageを追加
+      # バリデーションのエラーメッセージとは異なり、find_byメソッドで検索したが存在しなかったという結果を伝えるためのものなので自作する必要アリ
+      @error_message = "メールアドレスまたはパスワードが間違っています"
+      
+      # 再度入力する手間を省くため初期値として入力した値を再表示
+      @email = params[:email]
+      @password = params[:password]
+      
+      
+      render("users/login_form")
     end
   end
   
