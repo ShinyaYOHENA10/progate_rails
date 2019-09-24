@@ -55,10 +55,7 @@ class UsersController < ApplicationController
   def login
     @user = User.find_by(email: params[:email], password: params[:password])
     if @user
-      #ページを移動してもユーザ情報を保持するため以降sessionを活用
-      # 変数sessionに、ログインに成功したユーザーのidを代入
       session[:user_id] = @user.id
-      
       flash[:notice] = "ログインしました"
       redirect_to("/posts/index")
     else
@@ -67,6 +64,14 @@ class UsersController < ApplicationController
       @password = params[:password]
       render("users/login_form")
     end
+  end
+  
+  # logoutアクション追加
+  # sessionにnilを代入してログアウト
+  def logout
+    session[:user_id] = nil
+    flash[:notice] = "ログアウトしました"
+    redirect_to("/login")
   end
   
 end
