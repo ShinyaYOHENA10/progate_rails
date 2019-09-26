@@ -13,11 +13,11 @@
         <%= link_to("TweetApp", "/") %>
       </div>
       <ul class="header-menus">
-        <% if session[:user_id] %>
-        <%# ログイン中のヘッダー %>
+        <!-- @current_userに書き換え -->
+        <% if @current_user %>
           <li>
-            現在ログインしているユーザーのid:
-            <%= session[:user_id] %>
+            <!-- @current_userに書き換え -->
+            <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
           </li>
           <li>
             <%= link_to("投稿一覧", "/posts/index") %>
@@ -28,12 +28,10 @@
           <li>
             <%= link_to("ユーザー一覧", "/users/index") %>
           </li>
-          <%# method: :postでHTMLﾒｿｯﾄﾞをget→postへ変更 %>
           <li>
             <%= link_to("ログアウト", "/logout", {method: :post}) %>
           </li>
         <% else %>
-          <!-- ログインしていない状態 -->
           <li>
             <%= link_to("TweetAppとは", "/about") %>
           </li>
