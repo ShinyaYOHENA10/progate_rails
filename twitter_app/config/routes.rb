@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get "login" => "users#login_form"
   post "login" => "users#login"
-  # ログアウト用のルーティングを追加してください
+  # ログアウト用のルーティングを追加
   post "logout" => "users#logout"
 
   post "users/:id/update" => "users#update"
