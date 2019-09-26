@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+  # before_actionにauthenticate_userメソッドを指定
+  # 上のUsersControllerで継承してるのでauthenticate_user利用できる
+  before_action :authenticate_user, {only: [:index, :show, :edit, :update]}
   
   def index
     @users = User.all
@@ -17,12 +20,9 @@ class UsersController < ApplicationController
       name: params[:name],
       email: params[:email],
       image_name: "default_user.jpg",
-      # 入力フォームがなかったためparams[:password]をnewメソッドの引数に追加
-      # ユーザー登録フォームから送信されたパスワードを取得、ユーザーを保存する際にパスワードを保存
       password: params[:password]
     )
     if @user.save
-      # 登録成功時にそのままログインするよう上記「@user.id」を変数sessionに代入
       session[:user_id] = @user.id
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")
