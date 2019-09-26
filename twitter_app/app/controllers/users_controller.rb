@@ -16,9 +16,14 @@ class UsersController < ApplicationController
     @user = User.new(
       name: params[:name],
       email: params[:email],
-      image_name: "default_user.jpg"
+      image_name: "default_user.jpg",
+      # 入力フォームがなかったためparams[:password]をnewメソッドの引数に追加
+      # ユーザー登録フォームから送信されたパスワードを取得、ユーザーを保存する際にパスワードを保存
+      password: params[:password]
     )
     if @user.save
+      # 登録成功時にそのままログインするよう上記「@user.id」を変数sessionに代入
+      session[:user_id] = @user.id
       flash[:notice] = "ユーザー登録が完了しました"
       redirect_to("/users/#{@user.id}")
     else
@@ -66,8 +71,6 @@ class UsersController < ApplicationController
     end
   end
   
-  # logoutアクション追加
-  # sessionにnilを代入してログアウト
   def logout
     session[:user_id] = nil
     flash[:notice] = "ログアウトしました"
