@@ -7,9 +7,9 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find_by(id: params[:id])
-    # 変数@userを定義 @userにidが@post.user_idのﾕｰｻﾞｰを代入
-    @user = User.find_by(id: @post.user_id)
-    
+    # 以下の１行を、userメソッドを用いて書き換え
+    # @user = User.find_by(id: @post.user_id)
+    @user = @post.user
   end
   
   def new
