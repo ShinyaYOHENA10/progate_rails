@@ -7,6 +7,9 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find_by(id: params[:id])
+    # 変数@userを定義 @userにidが@post.user_idのﾕｰｻﾞｰを代入
+    @user = User.find_by(id: @post.user_id)
+    
   end
   
   def new
@@ -15,7 +18,6 @@ class PostsController < ApplicationController
   
   def create
     @post = Post.new(
-      # user_idの値をログインしている@current_userのidへ変更
       content: params[:content],
       user_id: @current_user.id
     )
