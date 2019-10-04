@@ -16,6 +16,14 @@
       <div class="post-time">
         <%= @post.created_at %>
       </div>
+            <!-- if文を用いてイイねの条件分岐　表示内容を切り替え -->
+            <!-- user_idとﾛｸﾞｲﾝﾕｰｻﾞid,post_idと投稿idの真偽 -->
+      <% if Like.find_by(user_id: @current_user.id, post_id: @post.id) %>
+      いいね！済み
+      <% else %>
+      いいね！していません
+      <% end %>
+
       <!-- ﾛｸﾞｲﾝﾕｰｻﾞidの投稿以外は編集不可にする -->
       <% if @post.user_id == @current_user.id %>
         <div class="post-menus">
@@ -27,3 +35,4 @@
     </div>
   </div>
 </div>
+
