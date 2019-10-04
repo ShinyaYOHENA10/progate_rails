@@ -2,9 +2,11 @@ class LikesController < ApplicationController
     # before_actionに「:authenticate_user」を追加し、ﾛｸﾞｲﾝﾕｰｻﾞのみにｱｸｾｽを制限
     before_action :authenticate_user
     
-    # createアクションを追加　10-6で中身作成
     def create
-      
+    # @likeを定義
+        @like = Like.new(user_id: @current_user.id, post_id: params[:post_id])
+        @like.save
+        redirect_to("/posts/#{params[:post_id]}")
     end
     
   end
