@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
   before_action :authenticate_user
+  # before_actionでensure_correct_userメソッドを指定しアクション前に実行
+  before_action :ensure_correct_user, {only: [:edit, :update, :destroy]}
   
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -7,8 +9,6 @@ class PostsController < ApplicationController
   
   def show
     @post = Post.find_by(id: params[:id])
-    # 以下の１行を、userメソッドを用いて書き換え
-    # @user = User.find_by(id: @post.user_id)
     @user = @post.user
   end
   
@@ -50,5 +50,14 @@ class PostsController < ApplicationController
     flash[:notice] = "投稿を削除しました"
     redirect_to("/posts/index")
   end
+  
+  # ensure_correct_userメソッドを作成　user_idとﾛｸﾞｲﾝﾕｰｻﾞidが異なる場合直接URL入力してもアクセス不可とする
+  def ensure_correct_user
+    @post = Post.find_by(id: params[:id])
+    if @post.user_id != @current_user.id
+      flash[:notice] = "権限がありません"
+      redirect_to("/posts/index")
+  end
+  
   
 end
