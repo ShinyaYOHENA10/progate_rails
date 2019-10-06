@@ -8,5 +8,16 @@ class LikesController < ApplicationController
         @like.save
         redirect_to("/posts/#{params[:post_id]}")
     end
+
+    #イイねの取り消し
+    def destroy
+        @like = Like.find_by(
+          user_id: @current_user.id,
+          post_id: params[:post_id]
+          )
+        # idがparams[:post_id]である投稿の詳細ページにリダイレクト(同一ページ)
+         @like.destroy
+         redirect_to("/posts/#{params[:post_id]}")
+      end
     
   end
