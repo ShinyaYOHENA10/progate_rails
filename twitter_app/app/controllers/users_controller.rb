@@ -78,6 +78,13 @@ class UsersController < ApplicationController
     flash[:notice] = "ログアウトしました"
     redirect_to("/login")
   end
+
+  def likes
+    # idがparams[:id]のUserｲﾝｽﾀﾝｽをDBから取得
+    @user = User.find_by(id: params[:id])
+    # @userと紐づくLikeインスタンスの配列をDBからwhereﾒｿｯﾄﾞで全て取得
+    @likes = Like.where(user_id: @user.id)
+  end
   
   # ensure_correct_userを定義し、ﾛｸﾞｲﾝﾕｰｻﾞとｱｸｾｽ先ﾕｰｻﾞﾍﾟｰｼﾞのidが不一致なら編集不可
   def ensure_correct_user
