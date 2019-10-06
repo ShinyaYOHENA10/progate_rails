@@ -23,12 +23,14 @@
         <% end %>  
 
       <% else %>
-      
+
         <!-- 以下も同様 -->
         <%= link_to("/likes/#{@post.id}/create", {method: "post"}) do %>
           <span class="fa fa-heart like-btn"></span>
         <% end %>
       <% end %>
+      <!-- いいね数表示 -->
+      <%= @likes_count %>
       <!-- ﾛｸﾞｲﾝﾕｰｻﾞidの投稿以外は編集不可にする -->
       <% if @post.user_id == @current_user.id %>
         <div class="post-menus">

@@ -10,6 +10,8 @@ class PostsController < ApplicationController
   def show
     @post = Post.find_by(id: params[:id])
     @user = @post.user
+    # いいね数表示 countメソッドは配列の要素数を取得するメソッドですが、テーブルのデータ数を取得するためにも利用可
+    @likes_count = Like.where(post_id: @post.id).count
   end
   
   def new
