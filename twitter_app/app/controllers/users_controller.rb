@@ -59,9 +59,19 @@ class UsersController < ApplicationController
   def login_form
   end
   
+=begin
+  これまでは
+      入力されたメールアドレスとパスワードに一致したuserが存在すればログイン
+  今後は
+      1. フォームに入力されたメールアドレスに一致するuserを取得
+      2. 入力されたパスワードとuser.passwordが一致するか判定
+=end
+
   def login
-    @user = User.find_by(email: params[:email], password: params[:password])
-    if @user
+    # メールアドレスのみを用いてユーザーを取得するよう書き換え
+    @user = User.find_by(email: params[:email])
+    # 入力されたemailを持つuserが存在 && 入力されたpassと暗号化されたpassが一致すること
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
       flash[:notice] = "ログインしました"
       redirect_to("/posts/index")

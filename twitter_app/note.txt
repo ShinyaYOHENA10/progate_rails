@@ -1,0 +1,16 @@
+学習コース11
+
+- - - - On terminal - - - -
+
+「password_digestカラムに暗号化されたパスワードを保存するためには、今まで通りpasswordに値を代入
+こうすることで、has_secure_passwordによってpasswordに代入された値が暗号化され、password_digestカラムに保存される
+このため、既にあるpasswordに関するコードを変更する必要」
+
+とあるが、自環境エディターだとuser.password = "pass"で代入できない
+nomethod error undefined methodとなる
+
+【追記】
+メソッド定義が必要と思い、has_secure_passwordを def/endで囲ってたのが原因
+またclass User < ApplicationRecord の「end」が最終行になく、
+postsメソッドがアクティベイトされてなかった
+凡ミス
