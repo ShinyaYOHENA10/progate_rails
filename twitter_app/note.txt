@@ -1,7 +1,7 @@
 学習コース11
 
 - - - - On terminal - - - -
-
+【問題1】
 「password_digestカラムに暗号化されたパスワードを保存するためには、今まで通りpasswordに値を代入
 こうすることで、has_secure_passwordによってpasswordに代入された値が暗号化され、password_digestカラムに保存される
 このため、既にあるpasswordに関するコードを変更する必要」
@@ -14,3 +14,20 @@ nomethod error undefined methodとなる
 またclass User < ApplicationRecord の「end」が最終行になく、
 postsメソッドがアクティベイトされてなかった
 凡ミス
+
+学習コース10-10
+【問題2】
+userモデル(user.rb)内にPostインスタンスを戻り値として返すpostsメソッドを定義するも
+ブラウザでユーザ詳細ページを開くとpostsメソッドは存在しないとエラー
+
+【追記】
+エラー文言を読むと、「user.user_id doesn't exit」とあある
+postsメソッドがPostインスタンスではなくUserインスタンスになっていたのが原因
+
+def posts
+    return Post.where(id: self.id)
+end
+
+とすると解決した
+加えて【問題2 追記】の「end」の位置に誤りがあった問題を解決したことで解決したと思われる
+数日解決できずにいたため安堵
